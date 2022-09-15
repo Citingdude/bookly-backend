@@ -9,6 +9,12 @@ export default class UsersController {
     return users;
   }
 
+  public async find({ params }) {
+    const user = await User.findOrFail(params.id);
+
+    return user;
+  }
+
   public async create({ request, response }) {
     const user = new User();
 
@@ -25,7 +31,7 @@ export default class UsersController {
       const payload = await request.validate({
         schema: newUserSchema,
       });
-      
+
       user.email = payload.email;
       user.password = payload.password;
 

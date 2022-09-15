@@ -12,4 +12,5 @@ Route.delete("/books/:id", "BooksController.delete");
 
 // Users
 Route.get("/users", "UsersController.index");
+Route.get("/users/:id", "UsersController.find");
 Route.post("/users", "UsersController.create");
