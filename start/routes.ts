@@ -17,7 +17,9 @@ Route.group(() => {
     // Users
     Route.get("/users", "UsersController.index");
     Route.get("/users/:id", "UsersController.find");
+    Route.patch("/users/:id", 'UsersController.update');
     Route.post("/users", "UsersController.create");
+    Route.delete("/users/:id", "UsersController.delete");
   }).prefix('/v1')
 
 }).prefix('/api')

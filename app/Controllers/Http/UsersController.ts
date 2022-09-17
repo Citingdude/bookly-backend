@@ -15,6 +15,26 @@ export default class UsersController {
     return user;
   }
 
+  public async update({ params, request, response }) {
+    const user = await User.findOrFail(params.id)
+
+    const updateUserSchema = schema.create({
+      email: schema.string([rules.email()])
+    })
+
+    try {
+      const payload = await request.validate({
+        schema: updateUserSchema
+      })
+
+      user.email = payload.email
+
+      await user.save()
+    } catch (error) {
+      response.badRequest(error.messages);
+    }
+  }
+
   public async create({ request, response }) {
     const user = new User();
 
@@ -42,5 +62,11 @@ export default class UsersController {
        */
       response.badRequest(error.messages);
     }
+  }
+
+  public async delete({ params }) {
+    const user = await User.findOrFail(params.id)
+
+    await user.delete()
   }
 }
