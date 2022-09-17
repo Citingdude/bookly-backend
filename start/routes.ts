@@ -4,13 +4,20 @@ Route.get("/", async () => {
   return { hello: "world" };
 });
 
-// Books
-Route.get("/books", "BooksController.index");
-Route.get("/books/:id", "BooksController.find");
-Route.post("/books", "BooksController.create");
-Route.delete("/books/:id", "BooksController.delete");
+// API
+Route.group(() => {
+  // V1
+  Route.group(() => {
+    // Books
+    Route.get("/books", "BooksController.index");
+    Route.get("/books/:id", "BooksController.find");
+    Route.post("/books", "BooksController.create");
+    Route.delete("/books/:id", "BooksController.delete");
 
-// Users
-Route.get("/users", "UsersController.index");
-Route.get("/users/:id", "UsersController.find");
-Route.post("/users", "UsersController.create");
+    // Users
+    Route.get("/users", "UsersController.index");
+    Route.get("/users/:id", "UsersController.find");
+    Route.post("/users", "UsersController.create");
+  }).prefix('/v1')
+
+}).prefix('/api')
