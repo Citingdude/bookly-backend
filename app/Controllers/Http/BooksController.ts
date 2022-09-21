@@ -2,10 +2,14 @@ import Book from "App/Models/Book";
 import { schema } from "@ioc:Adonis/Core/Validator";
 
 export default class BooksController {
-  public async index() {
-    const books = await Book.all();
+  public async index({ request }) {
+    const query = request.qs()
 
-    return books;
+    if (!query.user) {
+      return await Book.all();
+    }
+
+    return await Book.query().where('user_id', query.user)
   }
 
   public async create({ request }) {
@@ -18,6 +22,7 @@ export default class BooksController {
       subtitle: schema.string(),
       author: schema.string(),
       pages: schema.number(),
+      userId: schema.number()
     });
 
     const payload = await request.validate({ schema: newBookSchema });
@@ -28,6 +33,7 @@ export default class BooksController {
       book.subtitle = payload.subtitle;
       book.author = payload.author;
       book.pages = payload.pages;
+      book.userId = payload.userId
 
       await book.save();
 
