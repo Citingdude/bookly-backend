@@ -23,6 +23,7 @@ export default class BooksController {
       subtitle: schema.string(),
       author: schema.string(),
       pages: schema.number(),
+      description: schema.string(),
       userId: schema.number(),
     });
 
@@ -35,6 +36,7 @@ export default class BooksController {
       book.author = payload.author;
       book.pages = payload.pages;
       book.userId = payload.userId;
+      book.description = payload.description;
 
       await book.save();
 

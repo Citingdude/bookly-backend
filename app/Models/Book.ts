@@ -22,6 +22,9 @@ export default class Book extends BaseModel {
   public pages: number;
 
   @column()
+  public description: string;
+
+  @column()
   public userId: number;
 
   @column.dateTime({ autoCreate: true })

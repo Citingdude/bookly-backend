@@ -11,6 +11,7 @@ export default class extends BaseSchema {
       table.text("subtitle").nullable();
       table.text("author").notNullable();
       table.integer("pages");
+      table.text("description").nullable();
       table
         .integer("user_id")
         .unsigned()
