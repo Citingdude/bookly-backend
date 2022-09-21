@@ -23,7 +23,7 @@ export default class User extends BaseModel {
   public updatedAt: DateTime
 
   @hasMany(() => Book)
-  public posts: HasMany<typeof Book>
+  public books: HasMany<typeof Book>
 
   @beforeSave()
   public static async hashPassword(user: User) {
