@@ -1,8 +1,10 @@
 import Book from "App/Models/Book";
 import { schema } from "@ioc:Adonis/Core/Validator";
+import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+
 
 export default class BooksController {
-  public async index({ request }) {
+  public async index({ request }: HttpContextContract) {
     const query = request.qs()
 
     if (!query.user) {
