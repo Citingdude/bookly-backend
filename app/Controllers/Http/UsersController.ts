@@ -16,20 +16,20 @@ export default class UsersController {
   }
 
   public async update({ params, request, response }) {
-    const user = await User.findOrFail(params.id)
+    const user = await User.findOrFail(params.id);
 
     const updateUserSchema = schema.create({
-      email: schema.string([rules.email()])
-    })
+      email: schema.string([rules.email()]),
+    });
 
     try {
       const payload = await request.validate({
-        schema: updateUserSchema
-      })
+        schema: updateUserSchema,
+      });
 
-      user.email = payload.email
+      user.email = payload.email;
 
-      await user.save()
+      await user.save();
     } catch (error) {
       response.badRequest(error.messages);
     }
@@ -65,8 +65,8 @@ export default class UsersController {
   }
 
   public async delete({ params }) {
-    const user = await User.findOrFail(params.id)
+    const user = await User.findOrFail(params.id);
 
-    await user.delete()
+    await user.delete();
   }
 }

@@ -12,10 +12,10 @@ export default class extends BaseSchema {
       table.text("author").notNullable();
       table.integer("pages");
       table
-        .integer('user_id')
+        .integer("user_id")
         .unsigned()
-        .references('users.id')
-        .onDelete('CASCADE') // delete post when user is deleted
+        .references("users.id")
+        .onDelete("CASCADE"); // delete post when user is deleted
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

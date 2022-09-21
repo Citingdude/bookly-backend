@@ -22,7 +22,7 @@ export default class Book extends BaseModel {
   public pages: number;
 
   @column()
-  public userId: number
+  public userId: number;
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime;
@@ -31,5 +31,5 @@ export default class Book extends BaseModel {
   public updatedAt: DateTime;
 
   @belongsTo(() => User)
-  public user: BelongsTo<typeof User>
+  public user: BelongsTo<typeof User>;
 }

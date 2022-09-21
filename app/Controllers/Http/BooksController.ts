@@ -1,17 +1,16 @@
 import Book from "App/Models/Book";
 import { schema } from "@ioc:Adonis/Core/Validator";
-import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-
+import type { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 
 export default class BooksController {
   public async index({ request }: HttpContextContract) {
-    const query = request.qs()
+    const query = request.qs();
 
     if (!query.user) {
       return await Book.all();
     }
 
-    return await Book.query().where('user_id', query.user)
+    return await Book.query().where("user_id", query.user);
   }
 
   public async create({ request }) {
@@ -24,7 +23,7 @@ export default class BooksController {
       subtitle: schema.string(),
       author: schema.string(),
       pages: schema.number(),
-      userId: schema.number()
+      userId: schema.number(),
     });
 
     const payload = await request.validate({ schema: newBookSchema });
@@ -35,7 +34,7 @@ export default class BooksController {
       book.subtitle = payload.subtitle;
       book.author = payload.author;
       book.pages = payload.pages;
-      book.userId = payload.userId
+      book.userId = payload.userId;
 
       await book.save();
 
