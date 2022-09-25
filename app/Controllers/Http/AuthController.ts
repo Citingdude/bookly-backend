@@ -16,4 +16,11 @@ export default class AuthController {
       return response.unauthorized("Invalid credentials");
     }
   }
+
+  public async logout({ auth }: HttpContextContract) {
+    await auth.use("api").revoke();
+    return {
+      revoked: true,
+    };
+  }
 }
