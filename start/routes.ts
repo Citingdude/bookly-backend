@@ -20,5 +20,8 @@ Route.group(() => {
     Route.patch("/users/:id", "UsersController.update");
     Route.post("/users", "UsersController.create");
     Route.delete("/users/:id", "UsersController.delete");
+
+    // Authentication
+    Route.post("/login", "AuthController.login");
   }).prefix("/v1");
 }).prefix("/api");
