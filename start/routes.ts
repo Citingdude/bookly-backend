@@ -23,5 +23,12 @@ Route.group(() => {
 
     // Authentication
     Route.post("/login", "AuthController.login");
+    Route.post("/logout", "AuthController.logout");
+
+    // Dashboard
+    Route.get("dashboard", async ({ auth }) => {
+      await auth.use("api").authenticate();
+      console.log(auth.use("api").user!);
+    });
   }).prefix("/v1");
 }).prefix("/api");
