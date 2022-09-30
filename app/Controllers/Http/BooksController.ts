@@ -1,6 +1,7 @@
 import Book from "App/Models/Book";
 import { schema } from "@ioc:Adonis/Core/Validator";
 import type { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
+import Category from "App/Models/Category";
 
 export default class BooksController {
   public async index({ request }: HttpContextContract) {
@@ -58,5 +59,13 @@ export default class BooksController {
     await book.delete();
 
     return `Deleted book with id: ${params.id}`;
+  }
+
+  public async attach() {
+  const book = await Book.findOrFail(1);
+  const category = await Category.findOrFail(1);
+
+  // Performs insert query inside the pivot table
+  await book.related('categories').attach([category.id]);
   }
 }

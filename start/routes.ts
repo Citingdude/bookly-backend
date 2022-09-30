@@ -13,6 +13,7 @@ Route.group(() => {
     Route.get("/books/:id", "BooksController.find");
     Route.post("/books", "BooksController.create");
     Route.delete("/books/:id", "BooksController.delete");
+    Route.post("/books/attach", "BooksController.attach");
 
     // Users
     Route.get("/users", "UsersController.index");
