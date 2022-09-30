@@ -21,6 +21,10 @@ Route.group(() => {
     Route.post("/users", "UsersController.create");
     Route.delete("/users/:id", "UsersController.delete");
 
+    // Categories
+    Route.get("/categories", "CategoriesController.index");
+    Route.post("/categories", "CategoriesController.create");
+
     // Authentication
     Route.post("/login", "AuthController.login");
     Route.post("/logout", "AuthController.logout");
