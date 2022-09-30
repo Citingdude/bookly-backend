@@ -13,5 +13,5 @@ export default class Category extends BaseModel {
   public updatedAt: DateTime
 
   @manyToMany(() => Book)
-  public categories: ManyToMany<typeof Book>
+  public books: ManyToMany<typeof Book>
 }
