@@ -14,6 +14,7 @@ Route.group(() => {
     Route.post("/books", "BooksController.create");
     Route.delete("/books/:id", "BooksController.delete");
     Route.post("/books/attach", "BooksController.attach");
+    Route.get("/books-category", "BooksController.findByCategory");
 
     // Users
     Route.get("/users", "UsersController.index");

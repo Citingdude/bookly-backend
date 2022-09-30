@@ -68,4 +68,10 @@ export default class BooksController {
   // Performs insert query inside the pivot table
   await book.related('categories').attach([category.id]);
   }
+
+  public async findByCategory() {
+    const category = await Category.findOrFail(1);
+
+    return category.related("books").query()
+  }
 }
