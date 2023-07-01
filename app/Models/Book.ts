@@ -1,6 +1,7 @@
 import { DateTime } from "luxon";
-import { BaseModel, BelongsTo, belongsTo, column } from "@ioc:Adonis/Lucid/Orm";
+import { BaseModel, BelongsTo, belongsTo, column, manyToMany, ManyToMany } from "@ioc:Adonis/Lucid/Orm";
 import User from "./User";
+import Category from "./Category";
 
 export default class Book extends BaseModel {
   @column({ isPrimary: true })
@@ -35,4 +36,7 @@ export default class Book extends BaseModel {
 
   @belongsTo(() => User)
   public user: BelongsTo<typeof User>;
+
+  @manyToMany(() => Category)
+  public categories: ManyToMany<typeof Category>
 }

@@ -13,6 +13,8 @@ Route.group(() => {
     Route.get("/books/:id", "BooksController.find");
     Route.post("/books", "BooksController.create");
     Route.delete("/books/:id", "BooksController.delete");
+    Route.post("/books/attach", "BooksController.attach");
+    Route.get("/books-category", "BooksController.findByCategory");
 
     // Users
     Route.get("/users", "UsersController.index");
@@ -20,6 +22,10 @@ Route.group(() => {
     Route.patch("/users/:id", "UsersController.update");
     Route.post("/users", "UsersController.create");
     Route.delete("/users/:id", "UsersController.delete");
+
+    // Categories
+    Route.get("/categories", "CategoriesController.index");
+    Route.post("/categories", "CategoriesController.create");
 
     // Authentication
     Route.post("/login", "AuthController.login");
