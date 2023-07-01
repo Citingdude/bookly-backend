@@ -10,11 +10,13 @@ Route.group(() => {
   Route.group(() => {
     // Books
     Route.get("/books", "BooksController.index");
-    Route.get("/books/:id", "BooksController.find");
     Route.post("/books", "BooksController.create");
-    Route.delete("/books/:id", "BooksController.delete");
     Route.post("/books/attach", "BooksController.attach");
     Route.get("/books-category", "BooksController.findByCategory");
+
+    Route.get("/books/:id", "BooksController.find");
+    Route.delete("/books/:id", "BooksController.delete");
+    Route.post('/books/:id/image', "BooksController.addImage")
 
     // Users
     Route.get("/users", "UsersController.index");

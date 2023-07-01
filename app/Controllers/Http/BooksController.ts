@@ -2,6 +2,8 @@ import Book from "App/Models/Book";
 import { schema } from "@ioc:Adonis/Core/Validator";
 import type { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 import Category from "App/Models/Category";
+import Application from '@ioc:Adonis/Core/Application'
+
 
 export default class BooksController {
   public async index({ request }: HttpContextContract) {
@@ -62,16 +64,37 @@ export default class BooksController {
   }
 
   public async attach() {
-  const book = await Book.findOrFail(1);
-  const category = await Category.findOrFail(1);
+    const book = await Book.findOrFail(1);
+    const category = await Category.findOrFail(1);
 
-  // Performs insert query inside the pivot table
-  await book.related('categories').attach([category.id]);
+    // Performs insert query inside the pivot table
+    await book.related('categories').attach([category.id]);
   }
 
   public async findByCategory() {
     const category = await Category.findOrFail(1);
 
     return category.related("books").query()
+  }
+
+  public async addImage({ request }: HttpContextContract) {
+    const coverImage = request.file('cover_image', {
+      size: '2mb',
+      extnames: ['jpg', 'png', 'jpeg']
+    })
+
+    if (!coverImage) {
+      return
+    }
+
+    if (!coverImage.isValid) {
+      return coverImage.errors
+    }
+
+    await coverImage.moveToDisk('./')
+
+    const fileName = coverImage.fileName;
+
+    return fileName
   }
 }
