@@ -2,8 +2,6 @@ import Book from "App/Models/Book";
 import { schema } from "@ioc:Adonis/Core/Validator";
 import type { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 import Category from "App/Models/Category";
-import Application from '@ioc:Adonis/Core/Application'
-
 
 export default class BooksController {
   public async index({ request }: HttpContextContract) {
@@ -78,6 +76,9 @@ export default class BooksController {
   }
 
   public async addImage({ request }: HttpContextContract) {
+    const id = request.param('id')
+    const book = await Book.findOrFail(id)
+
     const coverImage = request.file('cover_image', {
       size: '2mb',
       extnames: ['jpg', 'png', 'jpeg']
@@ -95,6 +96,13 @@ export default class BooksController {
 
     const fileName = coverImage.fileName;
 
-    return fileName
+    if (!fileName)
+      return
+
+    book.image = fileName
+
+    book.save()
+
+    return book
   }
 }
