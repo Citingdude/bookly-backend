@@ -2,6 +2,8 @@ import Book from "App/Models/Book";
 import { schema } from "@ioc:Adonis/Core/Validator";
 import type { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 import Category from "App/Models/Category";
+import Drive from '@ioc:Adonis/Core/Drive'
+
 
 export default class BooksController {
   public async index({ request }: HttpContextContract) {
@@ -92,15 +94,18 @@ export default class BooksController {
       return coverImage.errors
     }
 
-    await coverImage.moveToDisk('./')
+    const fileName = coverImage.clientName;
 
-    const fileName = coverImage.fileName;
+    await coverImage.moveToDisk('./', {
+      name: fileName
+    })
 
     if (!fileName)
       return
 
-    book.image = fileName
+    const url = await Drive.getUrl(fileName)
 
+    book.image = url
     book.save()
 
     return book
